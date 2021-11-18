@@ -1,0 +1,17 @@
+version: '3'
+
+networks:
+  bridgx_test:
+
+services:
+
+  #######################  fe  ########################
+  fe:
+    container_name: bridgx_fe
+    restart: always
+    network_mode: "host"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
