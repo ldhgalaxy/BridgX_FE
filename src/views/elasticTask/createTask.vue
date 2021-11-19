@@ -14,12 +14,16 @@
                 placeholder="请输入任务名"
                 maxlength="40"
                 show-word-limit
+                @blur="checkTaskName"
               />
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="5"><div style="height: 16px" /></el-col>
-            <el-col :span="19"><div class="note">支持中文英文数字，限制40字符</div></el-col>
+            <el-col :span="19">
+              <div v-if="taskNameIllegal" class="note" style="color: #f4516c">请输入任务名</div>
+              <div v-else class="note">支持中文英文数字，限制40字符</div>
+            </el-col>
           </el-row>
         </div>
       </div>
@@ -165,7 +169,8 @@ export default {
         num: 0,
         otherNum: null
       },
-      clusters: []
+      clusters: [],
+      taskNameIllegal: false
     }
   },
   computed: {
@@ -194,6 +199,10 @@ export default {
     async submit() {
       if (this.task.num === 0 && this.task.otherNum === 0) {
         this.$message.info('执行机器数为0')
+        return
+      }
+      if (this.task.name === '') {
+        this.taskNameIllegal = true
         return
       }
       const count = this.task.num === 0 ? this.task.otherNum : this.task.num
@@ -227,6 +236,9 @@ export default {
     },
     addCluster() {
       this.$router.push({ name: 'clusterCreate' })
+    },
+    checkTaskName() {
+      this.taskNameIllegal = this.task.name === ''
     }
   }
 }
