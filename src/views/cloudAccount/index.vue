@@ -30,20 +30,20 @@
       </div>
       <div class="table">
         <el-table v-loading="loading" :data="accounts" border @selection-change="handleSelectionChange">
-          <el-table-column type="selection" width="55"/>
-          <el-table-column label="账户名" prop="account_name" />
-          <el-table-column label="云厂商">
+          <el-table-column type="selection" width="55" align="center" />
+          <el-table-column label="账户名" prop="account_name" align="center" />
+          <el-table-column label="云厂商" align="center">
             <template slot-scope="{row}">
               {{ row.provider | filterCloudProvider }}
             </template>
           </el-table-column>
-          <el-table-column label="账户信息" prop="account">
+          <el-table-column label="账户信息" prop="account" align="center">
             <template slot-scope="{ row }">
               {{ row.account }}<span style="margin-left: 5px; color: #0061e0">({{ aksk[row.provider].key }})</span>
             </template>
           </el-table-column>
-          <el-table-column label="创建人" prop="create_by" />
-          <el-table-column label="创建时间">
+          <el-table-column label="创建人" prop="create_by" align="center" />
+          <el-table-column label="创建时间" align="center">
             <template slot-scope="{row}">
               {{ row.create_at | formatMomentZone('YYYY-MM-DD HH:mm:ss') }}
             </template>

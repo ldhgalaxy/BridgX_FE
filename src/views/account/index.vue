@@ -16,12 +16,12 @@
       </div>
       <div class="table">
         <el-table v-loading="loading" :data="list" size="medium" border @selection-change="handleSelectionChange">
-          <el-table-column type="selection" width="55" />
-          <el-table-column label="ID" prop="user_id" />
-          <el-table-column label="用户名" prop="user_name" />
-          <el-table-column label="创建人" prop="create_by" />
-          <el-table-column label="创建时间" prop="create_at" />
-          <el-table-column label="账户状态">
+          <el-table-column type="selection" width="55" align="center" />
+          <el-table-column label="ID" prop="user_id" align="center" />
+          <el-table-column label="用户名" prop="user_name" align="center" />
+          <el-table-column label="创建人" prop="create_by" align="center" />
+          <el-table-column label="创建时间" prop="create_at" align="center" />
+          <el-table-column label="账户状态" align="center">
             <template slot-scope="{ row }">
               <el-switch
                 v-model="row.status"

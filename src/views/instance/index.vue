@@ -116,6 +116,7 @@
 <script>
 
 import { cloudProviders } from '@/config/cloud'
+import { filterStatuses } from '@/config/instance'
 import waves from '@/directive/waves'
 import { instanceDetail, instanceDescribeAll } from '@/api/instance'
 
@@ -167,7 +168,8 @@ export default {
         ip_inner: ''
       },
       dialogFormVisible: false,
-      detailTitle: '机器详情'
+      detailTitle: '机器详情',
+      filterStatuses
     }
   },
   created() {
@@ -183,7 +185,7 @@ export default {
     },
     async getList() {
       this.listLoading = true
-      const res = await instanceDescribeAll('', this.search.id, this.search.ip, this.search.provider, '', this.listQuery.page_number, this.listQuery.page_size)
+      const res = await instanceDescribeAll('', this.search.id, this.search.ip, this.search.provider, '', filterStatuses, this.listQuery.page_number, this.listQuery.page_size)
       this.list = _.get(res, 'instance_list', [])
       this.total = _.get(res, 'pager.total', 0)
       this.listLoading = false

@@ -19,12 +19,12 @@ export async function instanceNum(account, cluster_name) {
 }
 
 // 获取机器列表
-export async function instanceDescribeAll(account, instance_id, ip, provider, cluster_name, page_number, page_size) {
+export async function instanceDescribeAll(account, instance_id, ip, provider, cluster_name, status, page_number, page_size) {
   const token = getToken()
   const req = await request({
     url: '/api/v1/instance/describe_all',
     method: 'get',
-    params: { account, instance_id, ip, provider, cluster_name, page_number, page_size },
+    params: { account, instance_id, ip, provider, cluster_name, status, page_number, page_size },
     headers: {
       Authorization: ` Bearer ${token}`
     }

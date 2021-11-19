@@ -36,45 +36,49 @@
           highlight-current-row
           style="width: 100%;"
           size="medium"
-          @selection-change="handleSelectionChange"
         >
-          <el-table-column label="ID"><template slot-scope="scope">{{ scope.row.task_id }}</template></el-table-column>
-          <el-table-column label="任务名">
-            <template slot-scope="scope">
-              <el-button type="text" @click="showDetail(scope.row)">{{ scope.row.task_name }}</el-button>
+          <el-table-column label="ID" align="center">
+            <template slot-scope="{row}">
+              <el-button type="text" @click="showDetail(row)">{{ row.task_id }}
+              </el-button>
             </template>
           </el-table-column>
-          <el-table-column label="执行状态">
+          <el-table-column label="任务名" align="center">
+            <template slot-scope="scope">
+              {{ scope.row.task_name }}
+            </template>
+          </el-table-column>
+          <el-table-column label="执行状态" align="center">
             <template slot-scope="scope">
               {{ scope.row.task_status | parseTaskStatusRoughly }}
             </template>
           </el-table-column>
-          <el-table-column label="执行集群">
+          <el-table-column label="执行集群" align="center">
             <template slot-scope="scope">
               {{ scope.row.cluster_name }}
             </template>
           </el-table-column>
-          <el-table-column label="执行动作"><template slot-scope="{ row }">{{ row.task_action | parseTaskActionIcon }}</template></el-table-column>
-          <el-table-column label="执行结果">
+          <el-table-column label="执行动作" align="center"><template slot-scope="{ row }">{{ row.task_action | parseTaskActionIcon }}</template></el-table-column>
+          <el-table-column label="执行结果" align="center">
             <template slot-scope="{ row }">
               <span v-if="row.task_status === 'SUCCESS'" style="color: rgb(0,168,67)">成功</span>
               <span v-else-if="row.task_status === 'FAILED'" style="display: inline-block; background-color: #f4516c; color: white; padding: 2px 5px; border-radius: 10px">失败</span>
               <el-progress v-else :text-inside="true" :stroke-width="20" :percentage="getPercent(row.success_num, row.total_num)" />
             </template>
           </el-table-column>
-          <el-table-column label="失败/成功/全量">
+          <el-table-column label="失败/成功/全量" align="center">
             <template slot-scope="{row}">
               <span style="color: #f4516c">{{ row.fail_num }}</span> /
               <span style="color:rgb(0,168,67)">{{ row.success_num }}</span> /
               <span style="color:black">{{ row.total_num }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="执行时间">
+          <el-table-column label="执行时间" align="center">
             <template slot-scope="scope">
               {{ scope.row.create_at | formatMomentZone('YYYY-MM-DD HH:mm:ss') }}
             </template>
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" align="center">
             <template slot-scope="scope">
               <el-button type="text" @click="instancesDetail(scope.row)">执行明细</el-button>
             </template>
@@ -235,9 +239,6 @@ export default {
         cluster: '',
         status: ''
       }
-    },
-    handleSelectionChange(val) {
-      this.selectTasks = val
     },
     createTask() {
       this.$router.push({ name: 'createTask' })

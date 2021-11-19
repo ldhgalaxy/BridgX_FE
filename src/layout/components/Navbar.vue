@@ -5,6 +5,14 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
+      <div class="avatar-container el-dropdown" style="margin-right: 50px">
+        <div class="avatar-wrapper">
+          <div/>
+          <div style="height: 40px; cursor: pointer" @click="open('https://github.com/galaxy-future/BridgX/blob/master/docs/developer_api.md')">
+            API中心
+          </div>
+        </div>
+      </div>
       <el-dropdown class="avatar-container" style="margin-right: 60px" trigger="click" placement="bottom">
         <div class="avatar-wrapper">
           <div/>
@@ -22,9 +30,6 @@
           </el-dropdown-item>
           <el-dropdown-item divided @click.native="open('https://github.com/galaxy-future/BridgX/blob/master/docs/user-manual.md')">
             <span style="display:block;">用户手册</span>
-          </el-dropdown-item>
-          <el-dropdown-item divided @click.native="open('https://github.com/galaxy-future/BridgX/blob/master/docs/developer_api.md')">
-            <span style="display:block;">开发者手册</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -190,6 +195,20 @@ export default {
 
     &:focus {
       outline: none;
+    }
+
+    .api-container {
+      display: inline-block;
+      position: relative;
+      color: #606266;
+      height: 100%;
+      font-size: 14px;
+      .api-wrapper {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .right-menu-item {

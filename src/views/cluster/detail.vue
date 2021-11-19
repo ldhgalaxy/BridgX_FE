@@ -24,8 +24,20 @@
             <el-table-column align="center" label="状态">
               <template slot-scope="{row}">{{ row.status | formatInstanceStatuses }}</template>
             </el-table-column>
-            <el-table-column align="center" label="登录名"></el-table-column>
-            <el-table-column align="center" label="密码"></el-table-column>
+            <el-table-column align="center" label="登录名">
+              <template slot-scope="{row}">
+                <el-tooltip effect="dark" content="点击复制" placement="bottom">
+                  <span v-clipboard:copy="row.login_name" v-clipboard:success="clipboardSuccess" style="cursor: pointer">{{ row.login_name }}</span>
+                </el-tooltip>
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="密码">
+              <template slot-scope="{row}">
+                <el-tooltip effect="dark" content="点击复制" placement="bottom">
+                  <span v-clipboard:copy="row.login_password" v-clipboard:success="clipboardSuccess" style="cursor: pointer">{{ row.login_password }}</span>
+                </el-tooltip>
+              </template>
+            </el-table-column>
           </el-table>
           <pagination v-show="instanceTotal>0" :total="instanceTotal" :page.sync="instanceListQuery.page_number" :limit.sync="instanceListQuery.page_size" @pagination="fetchData" />
         </el-tab-pane>
@@ -41,9 +53,14 @@
 import _ from 'lodash'
 import Pagination from '@/components/Pagination'
 import { instanceDescribeAll } from '@/api/instance'
+import { filterStatuses } from '@/config/instance'
+import clipboard from '@/directive/clipboard/index'
 
 export default {
   name: 'Detail',
+  directives: {
+    clipboard
+  },
   components: { Pagination },
   data() {
     return {
@@ -54,7 +71,8 @@ export default {
         page_number: 1
       },
       instanceTotal: 0,
-      downloading: false
+      downloading: false,
+      filterStatuses
     }
   },
   mounted() {
@@ -63,10 +81,13 @@ export default {
   methods: {
     async fetchData() {
       if (this.$route.params.name !== '') {
-        const res = await instanceDescribeAll('', '', '', '', this.$route.params.name, this.instanceListQuery.page_number, this.instanceListQuery.page_size)
+        const res = await instanceDescribeAll('', '', '', '', this.$route.params.name, filterStatuses, this.instanceListQuery.page_number, this.instanceListQuery.page_size)
         this.instanceList = _.get(res, 'instance_list', [])
         this.instanceTotal = _.get(res, 'pager.total', 0)
       }
+    },
+    clipboardSuccess() {
+      this.$message.success('复制成功')
     },
     handleDownload() {
       this.downloadLoading = true

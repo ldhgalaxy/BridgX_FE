@@ -35,24 +35,24 @@
         <div style="font-size: 20px; padding: 10px">{{ date | formatMoment('YYYY-MM-DD') }} 机器使用时长</div>
         <div style="padding: 10px">
           <el-table v-loading="loading" :data="list" size="medium" border>
-            <el-table-column label="序号" prop="id" />
-            <el-table-column label="机器名称" prop="instance_id">
+            <el-table-column label="序号" prop="id" align="center" />
+            <el-table-column label="机器名称" prop="instance_id" align="center">
               <template slot-scope="{ row }">
                 <el-button size="medium" type="text" @click="showDetail(row.instance_id)">{{ row.instance_id }}</el-button>
               </template>
             </el-table-column>
-            <el-table-column label="开机时间">
+            <el-table-column label="开机时间" align="center">
               <template slot-scope="{ row }">
                 {{ row.startup_at | formatMomentZone('YYYY-MM-DD HH:mm:ss') }}
               </template>
             </el-table-column>
-            <el-table-column label="关机时间">
+            <el-table-column label="关机时间" align="center">
               <template slot-scope="{ row }">
                 {{ row.shutdown_at | formatMomentZone('YYYY-MM-DD  HH:mm:ss') }}
               </template>
             </el-table-column>
-            <el-table-column label="服务时长(秒)" prop="startup_time" />
-            <el-table-column label="机器类型" prop="instance_type" />
+            <el-table-column label="服务时长(秒)" prop="startup_time" align="center" />
+            <el-table-column label="机器类型" prop="instance_type" align="center" />
           </el-table>
           <pagination v-show="total>0" :total="total" :page.sync="listQuery.page_number" :limit.sync="listQuery.page_size" @pagination="fetchData" />
         </div>

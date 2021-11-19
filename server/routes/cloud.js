@@ -196,6 +196,22 @@ routerApi.post('/security_group/create', async(ctx) => {
   }
 })
 
+routerApi.post('/security_group/create_with_rule', async(ctx) => {
+  try {
+    ctx.body = await request({
+      headers: {
+        authorization: ctx.header.authorization
+      },
+      method: 'POST',
+      url: `${host.getHost()}/api/v1/security_group/create_with_rule`,
+      body: ctx.request.body,
+      json: true
+    })
+  } catch (e) {
+    ctx.body = e.error
+  }
+})
+
 routerApi.post('/security_group/rule/add', async(ctx) => {
   try {
     ctx.body = await request({

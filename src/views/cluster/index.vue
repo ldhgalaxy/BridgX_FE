@@ -41,31 +41,32 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column label="序号" prop="cluster_id" />
-          <el-table-column label="集群名称" min-width="100px">
+          <el-table-column label="序号" prop="cluster_id" align="center" />
+          <el-table-column label="集群名称" min-width="100px" align="center">
             <template slot-scope="{row}">
               <el-button size="medium" @click="gotoInfo(row.cluster_name)" type="text">{{ row.cluster_name }}</el-button>
             </template>
           </el-table-column>
+          <el-table-column label="在线机器数" prop="instance_count" align="center" />
           <el-table-column label="云厂商" width="150px" align="center">
             <template slot-scope="{row}">
               {{ row.provider | filterCloudProvider }}
             </template>
           </el-table-column>
-          <el-table-column label="云账号Key" min-width="100px">
+          <el-table-column label="云账号Key" min-width="100px" align="center">
             <template slot-scope="{row}">
               <span>{{ row.account }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="创建人" prop="create_by" />
-          <el-table-column label="创建时间" class-name="status-col" width="160">
+          <el-table-column label="创建人" prop="create_by" align="center" />
+          <el-table-column label="创建时间" class-name="status-col" width="160" align="center">
             <template slot-scope="{row}">
               <span>
                 {{ row.create_at | formatMomentZone('YYYY-MM-DD HH:mm:ss') }}
               </span>
             </template>
           </el-table-column>
-          <el-table-column label="集群描述" />
+          <el-table-column label="集群描述" align="center" />
         </el-table>
         <pagination v-show="total>0" :total="total" :page.sync="listQuery.page_number" :limit.sync="listQuery.page_size" @pagination="fetchData" />
       </div>

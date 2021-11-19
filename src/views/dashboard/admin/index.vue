@@ -5,7 +5,7 @@
         <div class="info">
           <panel-group />
           <div class="table-card">
-            <el-row ref="elLow" :gutter="8" style="height: 100%">
+            <el-row ref="elLow" style="height: 100%">
               <span style="font-size: 16px; color: darkgrey; font-weight: bolder">
                 任务信息
               </span>
@@ -15,11 +15,11 @@
             </el-row>
           </div>
         </div>
-        <div class="message">
-          <div class="title">
-            异常告警
-          </div>
-        </div>
+<!--        <div class="message">-->
+<!--          <div class="title">-->
+<!--            异常告警-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
       <div class="bottom">
         <div class="crafting-table">
@@ -77,8 +77,8 @@ export default {
       flex-direction: row;
       flex-basis: 100%;
       .info {
-        flex: 1;
-        flex-basis: 100%;
+        width: 100%;
+        //flex-basis: 100%;
         .table-card {
           background-color: #ffffff;
           padding: 10px;
@@ -86,18 +86,17 @@ export default {
           height: calc(~"100% - 148px");
         }
       }
-      .message {
-        flex: 1;
-        flex-basis: 200px;
-        color: #666;
-        background: #fff;
-        box-shadow: 4px 4px 5px rgba(0, 0, 0, .08);
-        margin: 10px 0 10px 10px;
-        .title {
-          padding: 5px;
-          font-weight: bold;
-        }
-      }
+      //.message {
+      //  flex-basis: 200px;
+      //  color: #666;
+      //  background: #fff;
+      //  box-shadow: 4px 4px 5px rgba(0, 0, 0, .08);
+      //  margin: 10px 0 10px 10px;
+      //  .title {
+      //    padding: 5px;
+      //    font-weight: bold;
+      //  }
+      //}
     }
     .bottom {
       display: flex;
