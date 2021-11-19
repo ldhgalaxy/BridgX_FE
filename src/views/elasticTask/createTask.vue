@@ -51,7 +51,7 @@
           <el-row>
             <el-col :span="5"><div class="center-text">集群当前机器数 </div></el-col>
             <el-col :span="5">
-              <div v-loading="instanceNumLoading" class="center-text">
+              <div v-loading="instanceNumLoading" class="info-text">
                 <span style="color: #f4516c; font-weight: bolder">{{ instanceNum }}</span> 台
               </div>
             </el-col>
@@ -253,6 +253,15 @@ export default {
       width: 700px;
     }
     .center-text {
+      font-size: 16px;
+      font-weight: bolder;
+      height: 36px;
+      display: flex;
+      padding-right: 30px;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+    .info-text {
       font-size: 16px;
       font-weight: bolder;
       height: 36px;

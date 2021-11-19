@@ -502,9 +502,11 @@ export default {
       const data = {
         ...this.cluster,
         network_config,
-        disks: {
-          system_disk: { ...this.system_disk },
-          data_disk: this.data_disks
+        storage_config: {
+          disks: {
+            system_disk: { ...this.system_disk },
+            data_disk: this.data_disks
+          }
         }
       }
       const res = await clusterCreate(data)
@@ -599,7 +601,8 @@ export default {
       font-weight: bolder;
       height: 36px;
       display: flex;
-      justify-content: center;
+      padding-right: 30px;
+      justify-content: flex-end;
       align-items: center;
     }
     .note {
